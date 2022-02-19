@@ -46,10 +46,15 @@ dependencies {
 	cxfCodegen "jakarta.annotation:jakarta.annotation-api:1.3.5"
 	cxfCodegen "ch.qos.logback:logback-classic:1.2.3"
 	implementation 'javax.jws:javax.jws-api:1.1'
+	compileOnly "com.sun.xml.ws:jaxws-ri:2.3.2"
+	compileOnly "com.sun.xml.ws:jaxws-rt:3.0.0"
 
 	compileOnly("org.apache.cxf:cxf-rt-frontend-jaxws:${cxfVersion}")
 	compileOnly("org.apache.cxf:cxf-rt-transports-http:${cxfVersion}")
 	compileOnly("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}")
+
+
+
 }
 
 cxfCodegen {
@@ -62,7 +67,7 @@ cxfCodegen {
 	}
 }
 
-compileJava.dependsOn wsdl2java
+//compileJava.dependsOn wsdl2java
 
 tasks.named('test') {
 	useJUnitPlatform()

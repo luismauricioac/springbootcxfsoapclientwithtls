@@ -1,13 +1,26 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'war'
+	id "io.mateo.cxf-codegen" version "1.0.0"
 }
+
+apply plugin: 'groovy'
+apply plugin: 'java'
 
 group = 'com.luismalamoc'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+def cxfVersion = '3.5.0'
 
 configurations {
 	compileOnly {
@@ -26,6 +39,27 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation 'org.codehaus.groovy:groovy-all:3.0.2'
+
+	cxfCodegen "jakarta.xml.ws:jakarta.xml.ws-api:2.3.3"
+	cxfCodegen "jakarta.annotation:jakarta.annotation-api:1.3.5"
+	cxfCodegen "ch.qos.logback:logback-classic:1.2.3"
+	implementation 'javax.jws:javax.jws-api:1.1'
+
+	compileOnly("org.apache.cxf:cxf-rt-frontend-jaxws:${cxfVersion}")
+	compileOnly("org.apache.cxf:cxf-rt-transports-http:${cxfVersion}")
+	compileOnly("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}")
+}
+
+cxfCodegen {
+	wsdl2java {
+		example {
+			wsdl = file("${projectDir}/src/main/resources/NumberConversion.wsdl")
+			outputDir = file("${buildDir}/generated-java")
+			markGenerated = true
+		}
+	}
 }
 
 tasks.named('test') {

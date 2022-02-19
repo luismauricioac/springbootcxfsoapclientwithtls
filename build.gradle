@@ -62,6 +62,8 @@ cxfCodegen {
 	}
 }
 
+compileJava.dependsOn wsdl2java
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

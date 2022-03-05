@@ -22,6 +22,7 @@ import org.apache.xml.security.signature.XMLSignature;
 import org.cryptacular.io.ClassPathResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -66,6 +67,7 @@ public class NumberConversionSoapClientConfiguration {
      * @return
      */
     @Bean
+    @Qualifier("numberConversionSoapConfig")
     public NumberConversionSoapType numberConversionSoapType(){
         // build the client
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();

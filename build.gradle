@@ -1,7 +1,6 @@
 buildscript {
 	repositories {
 		mavenCentral()
-		jcenter()
 	}
 }
 
@@ -11,6 +10,7 @@ plugins {
 	id 'java'
 	id 'war'
 	id "io.mateo.cxf-codegen" version "1.0.0"
+    id 'groovy'
 }
 
 apply plugin: 'groovy'
@@ -21,6 +21,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 def cxfVersion = '3.5.0'
+def resilience4jVersion = '1.7.1'
 
 configurations {
 	compileOnly {
@@ -39,6 +40,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	implementation 'org.codehaus.groovy:groovy-all:3.0.2'
 
@@ -53,7 +55,15 @@ dependencies {
 	compileOnly("org.apache.cxf:cxf-rt-transports-http:${cxfVersion}")
 	compileOnly("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}")
 
+    implementation "org.codehaus.groovy:groovy:3.0.9"
+    testImplementation platform("org.spockframework:spock-bom:2.1-groovy-3.0")
+    testImplementation "org.spockframework:spock-core"
 
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+
+    implementation "io.github.resilience4j:resilience4j-framework-common:${resilience4jVersion}"
+    implementation "io.github.resilience4j:resilience4j-circuitbreaker:${resilience4jVersion}"
 
 }
 

@@ -11,18 +11,20 @@ I'm using the webservice soap endpoint https://www.dataaccess.com/webservicesser
 ## Instructions
 
 ### Get webservice cert
-``
+```
 echo "" | openssl s_client -connect  www.dataaccess.com:443 -showcerts 2>/dev/null | openssl x509 -out certfile.txt
-``
+```
 
-### Generate auto-signed cert
-``
+### Generate truststore file and trust in the webservice cert
+```
+keytool -import -alias numberconversion -keystore truststore.ts -file numberconversion.txt
+```
+
+### Generate auto-signed cert to make digital sign on the soap message
+```
 keytool -genkey -alias luismalamoc -keyalg RSA -keysize 2048 -keystore luismalamoc.jks -dname "CN=luismalamoc, OU=luismalamoc, O=luismalamoc, L=Santiago, ST=RM, C=CL" -validity 365000
-``
-### Add webservice cert to Truststore
-``
-keytool -importcert -alias numberconversion -file certfile.txt -trustcacerts -keystore luismalamoc.jks -storetype JKS
-``
+```
+
 ## Notes
 
 - Autogenerate classes for webservice Client were generated with wsdl2java task added to build.gradle file

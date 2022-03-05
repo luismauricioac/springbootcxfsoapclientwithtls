@@ -9,15 +9,21 @@ import java.io.IOException;
 
 public class PasswordCallbackHandler implements CallbackHandler {
 
+    private String password;
+
+    public PasswordCallbackHandler(String password){
+        this.password = password;
+    }
+
     @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
             if (callbacks[i] instanceof WSPasswordCallback) {
                 WSPasswordCallback pc = (WSPasswordCallback)callbacks[i];
-                pc.setPassword(System.getProperty("org.apache.wss4j.crypto.merlin.keystore.password"));
+                pc.setPassword(this.password);
             } else {
                 throw new UnsupportedCallbackException(callbacks[i],
-                        "Callback desconocido");
+                        "Callback is not encountered");
             }
         }
     }

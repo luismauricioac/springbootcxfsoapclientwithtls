@@ -102,7 +102,7 @@ public class NumberConversionSoapClientConfiguration {
     public WSS4JOutInterceptor securityInterceptor() {
         Map<String, Object> properties = new HashMap<>();
         properties.put(ConfigurationConstants.USER, this.keyStoreAlias);
-        properties.put(ConfigurationConstants.PW_CALLBACK_REF, new PasswordCallbackHandler());
+        properties.put(ConfigurationConstants.PW_CALLBACK_REF, new PasswordCallbackHandler(this.keyStorePassword));
         properties.put(ConfigurationConstants.ACTION, ConfigurationConstants.SIGNATURE);
         properties.put(ConfigurationConstants.SIG_PROP_REF_ID, "signatureProperties");
         properties.put("signatureProperties", signatureProperties());
@@ -144,7 +144,7 @@ public class NumberConversionSoapClientConfiguration {
             tlsParams.setDisableCNCheck(soapClientProperties.isDisableHostnameCheck());
             tlsParams.setSecureSocketProtocol(TLSV1_2);
             // truststore
-            KeyStore trustStoreVar = KeyStore.getInstance(KeyStore.getDefaultType());
+            KeyStore trustStoreVar = KeyStore.getInstance("PKCS12");
             ClassPathResource classPathResourceTrustStore = new ClassPathResource(this.trustStore);
             InputStream inputStreamTrustStore = classPathResourceTrustStore.getInputStream();
             trustStoreVar.load(inputStreamTrustStore, trustStorePassword.toCharArray());

@@ -4,7 +4,6 @@ import com.luismalamoc.springbootcxfsoapclientwithtls.configuration.NumberConver
 import com.webservicesserver.NumberConversionSoapType;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -15,7 +14,6 @@ import java.math.BigInteger;
 public class NumberConversionSoapClient implements NumberConversionSoapType {
 
     @Autowired
-    @Qualifier("numberConversionSoapConfig")
     private NumberConversionSoapClientConfiguration numberConversionSoapClientConfiguration;
 
     @Override

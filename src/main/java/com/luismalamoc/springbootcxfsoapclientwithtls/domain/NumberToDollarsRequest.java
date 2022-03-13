@@ -14,5 +14,5 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class NumberToDollarsRequest {
     @NotNull
-    private BigDecimal dNum;
+    private BigDecimal decimalNumber;
 }

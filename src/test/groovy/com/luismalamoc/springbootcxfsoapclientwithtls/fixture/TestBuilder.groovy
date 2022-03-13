@@ -8,7 +8,7 @@ import com.luismalamoc.springbootcxfsoapclientwithtls.domain.NumberToWordsRespon
 class TestBuilder {
 
     static numberToWordsRequestBuilder(){
-        return NumberToWordsRequest.builder().ubiNum(BigInteger.valueOf(100)).build()
+        return NumberToWordsRequest.builder().integerNumber(BigInteger.valueOf(100)).build()
     }
 
     static numberToDollarsRequestBuilder(){

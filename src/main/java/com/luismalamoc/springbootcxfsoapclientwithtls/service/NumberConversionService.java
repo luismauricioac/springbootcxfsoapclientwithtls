@@ -31,7 +31,7 @@ public class NumberConversionService {
     public NumberToWordsResponse numberToWords(NumberToWordsRequest request){
         Supplier<String> decoratedSupplier = CircuitBreaker
                 .decorateSupplier(circuitBreakerNumberToWords,
-                        () -> numberConversionSoapClient.numberToWords(request.getUbiNum()));
+                        () -> numberConversionSoapClient.numberToWords(request.getIntegerNumber()));
         String responseSoap = Try.ofSupplier(decoratedSupplier)
                 .recover(throwable -> {
                     throw new RuntimeException("Something wrong was happened", throwable);
@@ -42,7 +42,7 @@ public class NumberConversionService {
     public NumberToDollarsResponse numberToDollars(NumberToDollarsRequest request){
         Supplier<String> decoratedSupplier = CircuitBreaker
                 .decorateSupplier(circuitBreakerNumberToDollars,
-                        () -> numberConversionSoapClient.numberToDollars(request.getDNum()));
+                        () -> numberConversionSoapClient.numberToDollars(request.getDecimalNumber()));
         String responseSoap = Try.ofSupplier(decoratedSupplier)
                 .recover(throwable -> {
                     throw new RuntimeException("Something wrong was happened", throwable);

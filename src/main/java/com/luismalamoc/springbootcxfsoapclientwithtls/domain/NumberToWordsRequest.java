@@ -14,5 +14,5 @@ import java.math.BigInteger;
 @AllArgsConstructor
 public class NumberToWordsRequest {
     @NotNull
-    private BigInteger ubiNum;
+    private BigInteger integerNumber;
 }

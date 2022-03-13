@@ -17,12 +17,6 @@ class NumberConversionSoapClientSpec extends Specification {
         soapClientProperties.getUrlWsdl() >> "https://www.dataaccess.com/webservicesserver/NumberConversion.wso?wsdl"
         soapClientProperties.disableHostnameCheck >> true
         config = new NumberConversionSoapClientConfiguration(soapClientProperties)
-        config.keyStore="src/test/resources/keystore.jks"
-        config.trustStore="src/test/resources/truststore.ts"
-        config.keyStorePassword="luismalamoc"
-        config.trustStorePassword="luismalamoc"
-        config.keyStoreAlias="luismalamoc"
-        config.keyStoreType="JKS"
         client = new NumberConversionSoapClient(config)
     }
 
